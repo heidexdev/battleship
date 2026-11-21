@@ -47,8 +47,23 @@ const gameBoard = (function () {
 
     return true;
   }
-  const ship1 = ship(3);
-  placeShip(ship1, 0, 0, "horizontal");
-  console.log(board);
-  return { placeShip };
+  function attack(x, y) {
+    const attackCell = board[x][y];
+    if (attackCell === null) {
+      board[x][y] = "miss";
+      return "miss";
+    }
+    if (attackCell === "hit" || attackCell === "miss") {
+      return "already attacked";
+    } else {
+      attackCell.hit();
+      board[x][y] = "hit";
+      if (attackCell.isSunk() === true) {
+        return "hit and sunk";
+      } else {
+        return "hit";
+      }
+    }
+  }
+  return { placeShip, attack };
 })();
