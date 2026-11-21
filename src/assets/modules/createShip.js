@@ -1,4 +1,4 @@
-function ship(length) {
+function createShip(length) {
   return {
     length: length,
     hits: 0,
@@ -12,4 +12,4 @@ function ship(length) {
     },
   };
 }
-export default ship;
+export default createShip;
