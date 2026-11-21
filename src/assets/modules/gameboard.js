@@ -66,6 +66,9 @@ function gameBoard() {
         }
       }
     },
+    isGameEnded() {
+      return this.ships.every((ship) => ship.isSunk());
+    },
   };
 }
 export default gameBoard;
