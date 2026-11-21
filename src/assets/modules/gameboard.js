@@ -69,6 +69,9 @@ function gameBoard() {
     isGameEnded() {
       return this.ships.every((ship) => ship.isSunk());
     },
+    getBoard() {
+      return this.board;
+    },
   };
 }
 export default gameBoard;
