@@ -1,5 +1,6 @@
-function gameBoard() {
+function gameBoard(name) {
   return {
+    name: name,
     board: [
       [null, null, null, null, null, null, null, null, null, null],
       [null, null, null, null, null, null, null, null, null, null],

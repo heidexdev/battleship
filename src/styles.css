@@ -44,3 +44,40 @@ h5,
 h6 {
   overflow-wrap: break-word;
 }
+
+body {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 60px;
+  background-color: #f1f5f9;
+  font-family: Arial, sans-serif;
+}
+
+.player-container,
+.computer-container {
+  display: grid;
+  grid-template-columns: repeat(10, 35px);
+  grid-template-rows: repeat(10, 35px);
+  border: 2px solid #334155;
+}
+
+.cell {
+  width: 35px;
+  height: 35px;
+  border: 1px solid #cbd5e1;
+  background-color: #e0f2fe;
+}
+
+.ship {
+  background-color: #64748b;
+}
+
+.hit {
+  background-color: #ef4444;
+}
+
+.miss {
+  background-color: #94a3b8;
+}
