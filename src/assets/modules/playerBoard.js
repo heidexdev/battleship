@@ -71,7 +71,7 @@ const playerBoard = (function () {
   function getBoard() {
     return board;
   }
-  return [placeShip, attack, isGameEnded, getBoard];
+  return { placeShip, attack, isGameEnded, getBoard };
 })();
 
 export default playerBoard;

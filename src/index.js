@@ -1,11 +1,10 @@
 import "./styles.css";
-import gameBoard from "./assets/modules/gameboard.js";
+import playerBoard from "./assets/modules/playerBoard.js";
+import computerBoard from "./assets/modules/computerBoard.js";
+import eventHandler from "./assets/modules/eventHandler.js";
 import render from "./assets/modules/render.js";
-import ship from "./assets/modules/ship.js";
 const playerContainer = document.querySelector(".player-container");
 const computerContainer = document.querySelector(".computer-container");
 
-const playerBoard = gameBoard("player");
-const computerBoard = gameBoard("computer");
-render.board(playerBoard.getBoard(), playerContainer);
-render.board(computerBoard.getBoard(), computerContainer);
+render.board(playerBoard.getBoard(),playerContainer)
+render.board(computerBoard.getBoard(),computerContainer)
