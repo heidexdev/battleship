@@ -1,6 +1,8 @@
 import gameController from "./gameController.js";
 
 const computerBoardEl = document.querySelector(".computer-board");
+const dirBtns = document.querySelectorAll(".direction-btn");
+const shipOptions = document.querySelectorAll(".ship-option");
 
 const eventHandler = (function () {
   function hitListener() {
@@ -18,8 +20,26 @@ const eventHandler = (function () {
       console.log("Game over:", gameController.isGameOver());
     });
   }
+  function selectionListener() {
+    dirBtns.forEach((btn) => {
+      btn.addEventListener("click", (e) => {
+        btn.classList.add("active");
+        const otherBtn = btn.nextElementSibling || btn.previousElementSibling;
+        otherBtn.classList.remove("active");
+      });
+    });
 
-  return { hitListener };
+    shipOptions.forEach((ship) => {
+      ship.addEventListener("click", (e) => {
+        const parent = ship.parentElement;
+        Array.from(parent.children).forEach((child) => {
+          child.classList.remove("selected");
+        });
+        ship.classList.add("selected");
+      });
+    });
+  }
+  return { hitListener, selectionListener };
 })();
 
 export default eventHandler;

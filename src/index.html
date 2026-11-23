@@ -8,9 +8,92 @@
   <body>
     <div class="player-container">
       <div class="player-board"></div>
-      <div class="selection"></div>
+      <div class="selection">
+        <div class="selection">
+          <h2>Your Fleet</h2>
+          <p class="fleet-info">Select a ship to place</p>
+
+          <div class="fleet-ships">
+            <button
+              class="ship-option"
+              type="button"
+              data-length="5"
+              data-ship="carrier"
+            >
+              <span class="ship-name">Carrier</span>
+              <span class="ship-preview">
+                <span></span><span></span><span></span><span></span
+                ><span></span>
+              </span>
+            </button>
+
+            <button
+              class="ship-option"
+              type="button"
+              data-length="4"
+              data-ship="battleship"
+            >
+              <span class="ship-name">Battleship</span>
+              <span class="ship-preview">
+                <span></span><span></span><span></span><span></span>
+              </span>
+            </button>
+
+            <button
+              class="ship-option"
+              type="button"
+              data-length="3"
+              data-ship="cruiser"
+            >
+              <span class="ship-name">Cruiser</span>
+              <span class="ship-preview">
+                <span></span><span></span><span></span>
+              </span>
+            </button>
+
+            <button
+              class="ship-option"
+              type="button"
+              data-length="3"
+              data-ship="submarine"
+            >
+              <span class="ship-name">Submarine</span>
+              <span class="ship-preview">
+                <span></span><span></span><span></span>
+              </span>
+            </button>
+
+            <button
+              class="ship-option"
+              type="button"
+              data-length="2"
+              data-ship="destroyer"
+            >
+              <span class="ship-name">Destroyer</span>
+              <span class="ship-preview"> <span></span><span></span> </span>
+            </button>
+          </div>
+
+          <div class="direction-selection">
+            <h3>Direction</h3>
+            <button
+              class="direction-btn active"
+              type="button"
+              data-direction="horizontal"
+            >
+              Horizontal
+            </button>
+            <button
+              class="direction-btn"
+              type="button"
+              data-direction="vertical"
+            >
+              Vertical
+            </button>
+          </div>
+        </div>
+      </div>
     </div>
-    <div class="computer-board">
-    </div>
+    <div class="computer-board"></div>
   </body>
 </html>
