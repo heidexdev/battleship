@@ -1,3 +1,4 @@
+import createShip from "./createShip.js";
 const computerBoard = (function () {
   const board = [
     [null, null, null, null, null, null, null, null, null, null],
@@ -71,6 +72,40 @@ const computerBoard = (function () {
   function getBoard() {
     return board;
   }
-  return {placeShip, attack, isGameEnded, getBoard};
+  function placeFleet() {
+    const fleet = [5, 4, 3, 3, 2];
+    fleet.forEach((length) => {
+      const ship = createShip(length);
+      const randomNum = Math.floor(Math.random() * 10);
+      let dir = "";
+      if (randomNum < 5) {
+        dir = "horizontal";
+      } else {
+        dir = "vertical";
+      }
+      let result = placeShip(
+        ship,
+        Math.floor(Math.random() * 10),
+        Math.floor(Math.random() * 10),
+        dir,
+      );
+      while (result === false) {
+        const randomNum = Math.floor(Math.random() * 10);
+        let dir = "";
+        if (randomNum < 5) {
+          dir = "horizontal";
+        } else {
+          dir = "vertical";
+        }
+        result = placeShip(
+          ship,
+          Math.floor(Math.random() * 10),
+          Math.floor(Math.random() * 10),
+          dir,
+        );
+      }
+    });
+  }
+  return { placeShip, attack, isGameEnded, getBoard ,placeFleet};
 })();
 export default computerBoard;

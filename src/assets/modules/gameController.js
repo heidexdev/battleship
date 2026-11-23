@@ -13,11 +13,11 @@ const gameController = (function () {
     playerBoard.placeShip(createShip(3), 0, 0, "horizontal");
 
     // Place computer's ships
-    computerBoard.placeShip(createShip(3), 4, 3, "horizontal");
+    computerBoard.placeFleet();
 
     // Initial rendering
     render.board(playerBoard.getBoard(), playerContainer);
-    render.board(computerBoard.getBoard(), computerContainer, true);
+    render.board(computerBoard.getBoard(), computerContainer, false);
   }
 
   function playerAttack(x, y) {
