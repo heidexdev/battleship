@@ -55,8 +55,8 @@ body {
   font-family: Arial, sans-serif;
 }
 
-.player-container,
-.computer-container {
+.player-board,
+.computer-board {
   display: grid;
   grid-template-columns: repeat(10, 35px);
   grid-template-rows: repeat(10, 35px);

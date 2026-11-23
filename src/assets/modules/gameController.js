@@ -3,8 +3,8 @@ import computerBoard from "./computerBoard.js";
 import createShip from "./createShip.js";
 import render from "./render.js";
 
-const playerContainer = document.querySelector(".player-container");
-const computerContainer = document.querySelector(".computer-container");
+const playerBoardEl = document.querySelector(".player-board");
+const computerBoardEl = document.querySelector(".computer-board");
 
 const gameController = (function () {
   let turn = "player";
@@ -16,8 +16,8 @@ const gameController = (function () {
     computerBoard.placeFleet();
 
     // Initial rendering
-    render.board(playerBoard.getBoard(), playerContainer);
-    render.board(computerBoard.getBoard(), computerContainer, false);
+    render.board(playerBoard.getBoard(), playerBoardEl);
+    render.board(computerBoard.getBoard(), computerBoardEl, false);
   }
 
   function playerAttack(x, y) {
@@ -32,7 +32,7 @@ const gameController = (function () {
         Math.floor(Math.random() * 10),
       );
     }
-    render.board(computerBoard.getBoard(), computerContainer, true);
+    render.board(computerBoard.getBoard(), computerBoardEl, true);
     if (isGameOver()) {
       console.log("gameOver");
     }
@@ -48,7 +48,7 @@ const gameController = (function () {
         Math.floor(Math.random() * 10),
       );
     } else {
-      render.board(playerBoard.getBoard(), playerContainer);
+      render.board(playerBoard.getBoard(), playerBoardEl);
       turn = "player";
       if (isGameOver()) {
         console.log("gameOver");

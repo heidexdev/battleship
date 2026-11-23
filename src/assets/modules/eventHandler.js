@@ -1,13 +1,13 @@
 import gameController from "./gameController.js";
 
-const computerContainer = document.querySelector(".computer-container");
+const computerBoardEl = document.querySelector(".computer-board");
 
 const eventHandler = (function () {
   function hitListener() {
-    computerContainer.addEventListener("click", (event) => {
+    computerBoardEl.addEventListener("click", (event) => {
       const cell = event.target.closest(".cell");
 
-      if (!cell || !computerContainer.contains(cell)) return;
+      if (!cell || !computerBoardEl.contains(cell)) return;
 
       const cellX = Number(cell.dataset.x);
       const cellY = Number(cell.dataset.y);
