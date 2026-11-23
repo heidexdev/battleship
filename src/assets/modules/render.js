@@ -47,7 +47,9 @@ const render = (function () {
           )
           .join("")}
       </div>
-
+      <button class="random-placement-btn" type="button">
+        Random Placement
+      </button>
       <div class="direction-selection">
         <h3>Direction</h3>
         <button

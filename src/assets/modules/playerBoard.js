@@ -88,13 +88,30 @@ const playerBoard = (function () {
   function getBoard() {
     return board;
   }
+  function placeFleet(fleet) {
+    reset();
 
+    fleet.forEach((ship) => {
+      let placed = false;
+
+      while (!placed) {
+        const x = Math.floor(Math.random() * 10);
+        const y = Math.floor(Math.random() * 10);
+        const direction = Math.random() < 0.5 ? "horizontal" : "vertical";
+
+        placed = placeShip(ship, x, y, direction);
+      }
+    });
+
+    return true;
+  }
   return {
     reset,
     placeShip,
     attack,
     isGameEnded,
     getBoard,
+    placeFleet,
   };
 })();
 

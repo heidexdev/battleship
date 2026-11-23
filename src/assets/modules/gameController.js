@@ -192,7 +192,26 @@ const gameController = (function () {
   function getPhase() {
     return phase;
   }
+  function randomPlacePlayerFleet() {
+    if (phase !== "placement") return false;
 
+    const ships = playerFleet.map((item) => item.ship);
+
+    playerBoard.placeFleet(ships);
+
+    playerFleet.forEach((item) => {
+      item.placed = true;
+    });
+
+    selectedShipId = null;
+    direction = "horizontal";
+
+    render.board(playerBoard.getBoard(), playerBoardEl);
+
+    updateStatus("All ships placed! You can start the game.");
+
+    return true;
+  }
   return {
     setup,
     reset,
@@ -204,6 +223,7 @@ const gameController = (function () {
     playerAttack,
     isGameOver,
     getPhase,
+    randomPlacePlayerFleet,
   };
 })();
 

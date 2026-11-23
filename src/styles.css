@@ -250,3 +250,16 @@ body {
 #reset-game:hover {
   background-color: #cbd5e1;
 }
+.random-placement-btn {
+  padding: 10px;
+  background-color: #0f766e;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.random-placement-btn:hover {
+  background-color: #115e59;
+}
