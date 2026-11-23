@@ -33,7 +33,9 @@ const gameController = (function () {
       );
     }
     render.board(computerBoard.getBoard(), computerContainer, true);
-
+    if (isGameOver()) {
+      console.log("gameOver");
+    }
     return result;
   }
 
@@ -48,6 +50,9 @@ const gameController = (function () {
     } else {
       render.board(playerBoard.getBoard(), playerContainer);
       turn = "player";
+      if (isGameOver()) {
+        console.log("gameOver");
+      }
       return result;
     }
   }
