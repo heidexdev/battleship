@@ -3,8 +3,11 @@ import playerBoard from "./assets/modules/playerBoard.js";
 import computerBoard from "./assets/modules/computerBoard.js";
 import eventHandler from "./assets/modules/eventHandler.js";
 import render from "./assets/modules/render.js";
+import createShip from "./assets/modules/createShip.js";
 const playerContainer = document.querySelector(".player-container");
 const computerContainer = document.querySelector(".computer-container");
-
-render.board(playerBoard.getBoard(),playerContainer)
-render.board(computerBoard.getBoard(),computerContainer)
+playerBoard.placeShip(createShip(3), 0, 0, "horizontal");
+computerBoard.placeShip(createShip(3), 4, 3, "horizontal");
+render.board(playerBoard.getBoard(), playerContainer);
+render.board(computerBoard.getBoard(), computerContainer);
+eventHandler.hitListener();
