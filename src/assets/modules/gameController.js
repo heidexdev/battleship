@@ -8,6 +8,11 @@ const computerBoardEl = document.querySelector(".computer-board");
 
 const gameController = (function () {
   let turn = "player";
+  let selectedShipLength = "";
+  let direction = "";
+  let x = null;
+  let y = null;
+
   function setup() {
     // Place player's ships
     playerBoard.placeShip(createShip(3), 0, 0, "horizontal");
@@ -57,6 +62,20 @@ const gameController = (function () {
     }
   }
 
+  function placeShip(ship, corX, corY, dir) {
+    selectedShipLength = ship;
+    direction = dir;
+    x = Number(corX);
+    y = Number(corY);
+    const result = playerBoard.placeShip(
+      createShip(selectedShipLength),
+      x,
+      y,
+      direction,
+    );
+    render.board(playerBoard.getBoard(), playerBoardEl);
+    return result;
+  }
   function isGameOver() {
     return playerBoard.isGameEnded() || computerBoard.isGameEnded();
   }
@@ -65,6 +84,7 @@ const gameController = (function () {
     playerAttack,
     computerAttack,
     isGameOver,
+    placeShip,
   };
 })();
 

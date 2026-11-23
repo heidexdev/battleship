@@ -5,3 +5,4 @@ import eventHandler from "./assets/modules/eventHandler.js";
 gameController.setup();
 eventHandler.hitListener();
 eventHandler.selectionListener();
+eventHandler.placeListener();
