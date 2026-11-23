@@ -3,97 +3,32 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>battleship</title>
+    <title>Battleship</title>
   </head>
   <body>
-    <div class="player-container">
-      <div class="player-board"></div>
-      <div class="selection">
-        <div class="selection">
-          <h2>Your Fleet</h2>
-          <p class="fleet-info">Select a ship to place</p>
+    <header class="game-header">
+      <h1>Battleship</h1>
+      <p id="game-status">Place your ships to start the game.</p>
+    </header>
 
-          <div class="fleet-ships">
-            <button
-              class="ship-option"
-              type="button"
-              data-length="5"
-              data-ship="carrier"
-            >
-              <span class="ship-name">Carrier</span>
-              <span class="ship-preview">
-                <span></span><span></span><span></span><span></span
-                ><span></span>
-              </span>
-            </button>
-
-            <button
-              class="ship-option"
-              type="button"
-              data-length="4"
-              data-ship="battleship"
-            >
-              <span class="ship-name">Battleship</span>
-              <span class="ship-preview">
-                <span></span><span></span><span></span><span></span>
-              </span>
-            </button>
-
-            <button
-              class="ship-option"
-              type="button"
-              data-length="3"
-              data-ship="cruiser"
-            >
-              <span class="ship-name">Cruiser</span>
-              <span class="ship-preview">
-                <span></span><span></span><span></span>
-              </span>
-            </button>
-
-            <button
-              class="ship-option"
-              type="button"
-              data-length="3"
-              data-ship="submarine"
-            >
-              <span class="ship-name">Submarine</span>
-              <span class="ship-preview">
-                <span></span><span></span><span></span>
-              </span>
-            </button>
-
-            <button
-              class="ship-option"
-              type="button"
-              data-length="2"
-              data-ship="destroyer"
-            >
-              <span class="ship-name">Destroyer</span>
-              <span class="ship-preview"> <span></span><span></span> </span>
-            </button>
-          </div>
-
-          <div class="direction-selection">
-            <h3>Direction</h3>
-            <button
-              class="direction-btn active"
-              type="button"
-              data-direction="horizontal"
-            >
-              Horizontal
-            </button>
-            <button
-              class="direction-btn"
-              type="button"
-              data-direction="vertical"
-            >
-              Vertical
-            </button>
-          </div>
+    <main class="game-layout">
+      <section class="board-section">
+        <h2>Your Board</h2>
+        <div class="player-container">
+          <div class="player-board"></div>
+          <div class="selection"></div>
         </div>
-      </div>
+      </section>
+
+      <section class="board-section">
+        <h2>Enemy Board</h2>
+        <div class="computer-board"></div>
+      </section>
+    </main>
+
+    <div class="game-controls">
+      <button id="start-game" type="button" disabled>Start Game</button>
+      <button id="reset-game" type="button">Reset Game</button>
     </div>
-    <div class="computer-board"></div>
   </body>
 </html>

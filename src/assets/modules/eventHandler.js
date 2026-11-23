@@ -1,80 +1,103 @@
+
 import gameController from "./gameController.js";
 
 const computerBoardEl = document.querySelector(".computer-board");
-const dirBtns = document.querySelectorAll(".direction-btn");
-const shipOptions = document.querySelectorAll(".ship-option");
 const playerBoardEl = document.querySelector(".player-board");
+const selectionEl = document.querySelector(".selection");
+
+const startButton = document.querySelector("#start-game");
+const resetButton = document.querySelector("#reset-game");
 
 const eventHandler = (function () {
-  function hitListener() {
-    computerBoardEl.addEventListener("click", (event) => {
-      const cell = event.target.closest(".cell");
+  let selectedShipId = null;
 
-      if (!cell || !computerBoardEl.contains(cell)) return;
+  function init() {
+    selectionEl.addEventListener("click", selectionListener);
+    playerBoardEl.addEventListener("click", placeListener);
+    computerBoardEl.addEventListener("click", hitListener);
 
-      const cellX = Number(cell.dataset.x);
-      const cellY = Number(cell.dataset.y);
+    startButton.addEventListener("click", () => {
+      gameController.startGame();
+    });
 
-      const result = gameController.playerAttack(cellX, cellY);
+    resetButton.addEventListener("click", () => {
+      gameController.reset();
 
-      console.log(result);
-      console.log("Game over:", gameController.isGameOver());
+      selectedShipId = null;
     });
   }
-  let direction = null;
-  let length = null;
-  function selectionListener() {
-    dirBtns.forEach((btn) => {
-      btn.addEventListener("click", (e) => {
-        btn.classList.add("active");
-        direction = btn.dataset.direction;
-        const otherBtn = btn.nextElementSibling || btn.previousElementSibling;
-        otherBtn.classList.remove("active");
+
+  function selectionListener(event) {
+    const directionBtn = event.target.closest(".direction-btn");
+
+    if (directionBtn && selectionEl.contains(directionBtn)) {
+      gameController.setDirection(directionBtn.dataset.direction);
+
+      selectionEl.querySelectorAll(".direction-btn").forEach((btn) => {
+        btn.classList.toggle("active", btn === directionBtn);
       });
-    });
 
-    shipOptions.forEach((ship) => {
-      ship.addEventListener("click", (e) => {
-        const parent = ship.parentElement;
-        Array.from(parent.children).forEach((child) => {
-          child.classList.remove("selected");
-        });
-        ship.classList.add("selected");
-        length = Number(ship.dataset.length);
-      });
+      return;
+    }
+
+    const shipButton = event.target.closest(".ship-option");
+
+    if (
+      !shipButton ||
+      !selectionEl.contains(shipButton) ||
+      shipButton.disabled
+    ) {
+      return;
+    }
+
+    const shipId = shipButton.dataset.ship;
+
+    if (!gameController.selectShip(shipId)) return;
+
+    selectedShipId = shipId;
+
+    selectionEl.querySelectorAll(".ship-option").forEach((ship) => {
+      ship.classList.toggle("selected", ship === shipButton);
     });
   }
-  function placeListener() {
-    playerBoardEl.addEventListener("click", (event) => {
-      const cell = event.target.closest(".cell");
 
-      if (!cell || !playerBoardEl.contains(cell)) return;
-      if (direction === null|| length === null) return;
+  function placeListener(event) {
+    const cell = event.target.closest(".cell");
 
-      const result = gameController.placeShip(
-        length,
-        cell.dataset.x,
-        cell.dataset.y,
-        direction,
-      );
-      if (result) {
-        disableShip(length);
-        length = null;
-        direction = null;
-      }
-    });
+    if (!cell || !playerBoardEl.contains(cell)) return;
+    if (selectedShipId === null) return;
+
+    const result = gameController.placePlayerShip(
+      Number(cell.dataset.x),
+      Number(cell.dataset.y),
+    );
+
+    if (!result) return;
+
+    const selectedButton = selectionEl.querySelector(
+      `[data-ship="${selectedShipId}"]`,
+    );
+
+    selectedButton.disabled = true;
+    selectedButton.classList.remove("selected");
+
+    selectedShipId = null;
+
+    startButton.disabled = !gameController.isPlacementComplete();
   }
-  function disableShip(length) {
-    shipOptions.forEach((ship) => {
-      ship.addEventListener("click", (e) => {
-        if (Number(ship.dataset.length) === length) {
-          ship.disabled = true;
-          ship.classList.remove("selected");
-        }
-      });
-    });
+
+  function hitListener(event) {
+    const cell = event.target.closest(".cell");
+
+    if (!cell || !computerBoardEl.contains(cell)) return;
+
+    gameController.playerAttack(
+      Number(cell.dataset.x),
+      Number(cell.dataset.y),
+    );
   }
-  return { hitListener, selectionListener, placeListener };
+
+  return { init };
 })();
 
 export default eventHandler;

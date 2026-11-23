@@ -5,52 +5,84 @@
 body {
   min-height: 100vh;
   margin: 0;
-  padding: 40px;
+  padding: 35px;
+  background-color: #f1f5f9;
+  color: #1e293b;
+  font-family: Arial, sans-serif;
+}
+
+.game-header {
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.game-header h1 {
+  margin: 0 0 12px;
+  font-size: 36px;
+}
+
+#game-status {
+  color: #64748b;
+  font-size: 15px;
+  min-height: 18px;
+}
+
+.game-layout {
   display: flex;
   justify-content: center;
-  align-items: center;
-  gap: 50px;
-  background-color: #f8fafc;
-  font-family: Arial, sans-serif;
-  color: #1e293b;
+  align-items: flex-start;
+  gap: 60px;
 }
 
-/* Player section */
+.board-section {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.board-section h2 {
+  margin: 0;
+  font-size: 20px;
+}
+
+/* Player board and fleet selection */
+
 .player-container {
   display: flex;
-  align-items: center;
-  gap: 25px;
+  align-items: flex-start;
+  gap: 20px;
 }
 
-/* Both boards */
+/* Boards */
+
 .player-board,
 .computer-board {
   display: grid;
-  grid-template-columns: repeat(10, 35px);
-  grid-template-rows: repeat(10, 35px);
-  border: 2px solid #334155;
-  background-color: #cbd5e1;
+  grid-template-columns: repeat(10, 34px);
+  grid-template-rows: repeat(10, 34px);
   gap: 1px;
+  padding: 1px;
+  background-color: #94a3b8;
+  border: 2px solid #334155;
 }
 
-/* Board cells */
 .cell {
-  width: 35px;
-  height: 35px;
+  width: 34px;
+  height: 34px;
   background-color: #e0f2fe;
-  cursor: pointer;
   transition: background-color 0.15s ease;
 }
 
-.player-board .cell {
-  cursor: default;
+.computer-board .cell {
+  cursor: crosshair;
 }
 
-.computer-board .cell:hover {
+.computer-board .cell:hover:not(.hit):not(.miss) {
   background-color: #bae6fd;
 }
 
-/* Ship and attack states */
+/* Board states */
+
 .ship {
   background-color: #64748b;
 }
@@ -63,16 +95,17 @@ body {
   background-color: #94a3b8;
 }
 
-/* Fleet selection panel */
+/* Fleet selection */
+
 .selection {
-  width: 240px;
-  padding: 20px;
+  width: 235px;
+  padding: 18px;
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  gap: 15px;
   background-color: white;
   border: 1px solid #e2e8f0;
-  border-radius: 12px;
+  border-radius: 10px;
   box-shadow: 0 4px 12px rgb(15 23 42 / 6%);
 }
 
@@ -83,11 +116,11 @@ body {
 }
 
 .selection h2 {
-  font-size: 20px;
+  font-size: 19px;
 }
 
 .selection h3 {
-  font-size: 15px;
+  font-size: 14px;
 }
 
 .fleet-info {
@@ -95,7 +128,6 @@ body {
   font-size: 13px;
 }
 
-/* Available ships */
 .fleet-ships {
   display: flex;
   flex-direction: column;
@@ -104,17 +136,16 @@ body {
 
 .ship-option {
   width: 100%;
-  padding: 12px;
+  padding: 10px;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  gap: 9px;
+  gap: 8px;
   background-color: #f1f5f9;
   border: 2px solid transparent;
-  border-radius: 8px;
+  border-radius: 7px;
   color: #334155;
   cursor: pointer;
-  transition: 0.15s ease;
 }
 
 .ship-option:hover:not(:disabled) {
@@ -127,35 +158,34 @@ body {
 }
 
 .ship-name {
-  font-size: 14px;
+  font-size: 13px;
   font-weight: 600;
 }
 
-/* Visual ship length */
 .ship-preview {
   display: flex;
   gap: 3px;
 }
 
 .ship-preview span {
-  width: 16px;
-  height: 16px;
+  width: 15px;
+  height: 15px;
   background-color: #64748b;
   border-radius: 2px;
 }
 
-/* Already placed ships */
 .ship-option:disabled {
-  opacity: 0.4;
+  opacity: 0.35;
   cursor: not-allowed;
   background-color: #f8fafc;
 }
 
 /* Direction controls */
+
 .direction-selection {
   display: flex;
   flex-wrap: wrap;
-  gap: 8px;
+  gap: 7px;
 }
 
 .direction-selection h3 {
@@ -164,18 +194,13 @@ body {
 
 .direction-btn {
   flex: 1;
-  padding: 9px 5px;
+  padding: 8px 4px;
   background-color: #f1f5f9;
   border: 1px solid #cbd5e1;
-  border-radius: 6px;
+  border-radius: 5px;
   color: #475569;
-  font-size: 13px;
+  font-size: 12px;
   cursor: pointer;
-  transition: 0.15s ease;
-}
-
-.direction-btn:hover {
-  background-color: #e2e8f0;
 }
 
 .direction-btn.active {
@@ -183,4 +208,45 @@ body {
   border-color: #3b82f6;
   color: #1d4ed8;
   font-weight: 600;
+}
+
+/* Game controls */
+
+.game-controls {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  margin-top: 35px;
+}
+
+.game-controls button {
+  padding: 11px 22px;
+  border: none;
+  border-radius: 6px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+#start-game {
+  background-color: #2563eb;
+  color: white;
+}
+
+#start-game:hover:not(:disabled) {
+  background-color: #1d4ed8;
+}
+
+#start-game:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+#reset-game {
+  background-color: #e2e8f0;
+  color: #334155;
+}
+
+#reset-game:hover {
+  background-color: #cbd5e1;
 }
