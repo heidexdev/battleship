@@ -1,26 +1,9 @@
-import playerBoard from "./playerBoard.js";
-import computerBoard from "./computerBoard.js";
-import render from "./render.js";
+import gameController from "./gameController.js";
 
-const playerContainer = document.querySelector(".player-container");
 const computerContainer = document.querySelector(".computer-container");
 
 const eventHandler = (function () {
   function hitListener() {
-    playerContainer.addEventListener("click", (event) => {
-      const cell = event.target.closest(".cell");
-
-      if (!cell || !playerContainer.contains(cell)) return;
-
-      const cellX = Number(cell.dataset.x);
-      const cellY = Number(cell.dataset.y);
-
-      const result = playerBoard.attack(cellX, cellY);
-      console.log(result);
-
-      render.board(playerBoard.getBoard(), playerContainer);
-    });
-
     computerContainer.addEventListener("click", (event) => {
       const cell = event.target.closest(".cell");
 
@@ -29,10 +12,10 @@ const eventHandler = (function () {
       const cellX = Number(cell.dataset.x);
       const cellY = Number(cell.dataset.y);
 
-      const result = computerBoard.attack(cellX, cellY);
-      console.log(result);
+      const result = gameController.playerAttack(cellX, cellY);
 
-      render.board(computerBoard.getBoard(), computerContainer);
+      console.log(result);
+      console.log("Game over:", gameController.isGameOver());
     });
   }
 

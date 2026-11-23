@@ -1,5 +1,5 @@
 const render = (function () {
-  function board(board, container) {
+  function board(board, container, hideShips = false) {
     container.innerHTML = "";
 
     board.forEach((row, x) => {
@@ -13,7 +13,7 @@ const render = (function () {
           cellElement.classList.add("hit");
         } else if (cell === "miss") {
           cellElement.classList.add("miss");
-        } else if (cell !== null) {
+        } else if (cell !== null && !hideShips) {
           cellElement.classList.add("ship");
         }
 
@@ -21,6 +21,7 @@ const render = (function () {
       });
     });
   }
+
   return { board };
 })();
 
